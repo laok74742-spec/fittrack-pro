@@ -46,12 +46,7 @@ class _CustomWebViewScreenState extends State<CustomWebViewScreen> {
             icon: const Icon(Icons.refresh),
             onPressed: () => _controller.reload(),
           ),
-          IconButton(
-            icon: const Icon(Icons.fitness_center),
-            onPressed: () async {
-              await _configService.switchToFitness();
-            },
-          ),
+          // 切换按钮已移除 - 仅后台控制
         ],
       ),
       body: Stack(

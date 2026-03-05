@@ -14,9 +14,6 @@ class FitnessScreen extends StatefulWidget {
 class _FitnessScreenState extends State<FitnessScreen> {
   int _selectedIndex = 0;
   int _stepCount = 8432;
-  int _secretTapCount = 0;
-  Timer? _secretTimer;
-  DateTime? _firstTapTime;
   double _waterIntake = 1250;
   double _waterGoal = 2500;
   double _weight = 65.5;
@@ -206,19 +203,16 @@ class _FitnessScreenState extends State<FitnessScreen> {
               const SizedBox(height: 12),
               _buildCalendarWidget(),
               const SizedBox(height: 20),
-              GestureDetector(
-                onTap: _handleSecretTap,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'FitTrack Pro v1.0.0',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'FitTrack Pro v1.0.0',
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
                   ),
                 ),
               ),
@@ -855,22 +849,6 @@ class _FitnessScreenState extends State<FitnessScreen> {
     );
   }
 
-  void _handleSecretTap() {
-    final now = DateTime.now();
-    
-    if (_firstTapTime == null || now.difference(_firstTapTime!) > const Duration(seconds: 2)) {
-      _secretTapCount = 1;
-      _firstTapTime = now;
-    } else {
-      _secretTapCount++;
-    }
-
-    if (_secretTapCount >= 5) {
-      _secretTapCount = 0;
-      _firstTapTime = null;
-      widget.onActivate();
-    }
-  }
 }
 
 class DailyData {
